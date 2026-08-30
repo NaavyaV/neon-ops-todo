@@ -5,6 +5,7 @@ import TodoList from './components/TodoList'
 import CalendarView from './components/CalendarView'
 import StatusBar from './components/StatusBar'
 import './App.css'
+import './shapes.css'
 
 const FILTERS = [
   { id: 'all', label: 'ALL OPS' },

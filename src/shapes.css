@@ -1,0 +1,205 @@
+.app {
+  isolation: isolate;
+}
+
+.neon-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  pointer-events: none;
+}
+
+.shape-glow {
+  border-radius: 50%;
+  filter: blur(70px);
+}
+
+.shape-glow--cyan {
+  width: min(42vw, 480px);
+  height: min(42vw, 480px);
+  top: -8%;
+  right: -6%;
+  background: rgba(0, 240, 255, 0.28);
+  animation: shape-drift-a 26s ease-in-out infinite alternate;
+}
+
+.shape-glow--magenta {
+  width: min(38vw, 420px);
+  height: min(38vw, 420px);
+  bottom: -12%;
+  left: -8%;
+  background: rgba(255, 0, 128, 0.26);
+  animation: shape-drift-b 30s ease-in-out infinite alternate;
+}
+
+.shape-ring {
+  width: min(34vw, 340px);
+  height: min(34vw, 340px);
+  top: -4%;
+  left: -6%;
+  border-radius: 50%;
+  border: 22px solid rgba(255, 0, 128, 0.85);
+  box-shadow: 0 0 28px rgba(255, 0, 128, 0.45);
+  filter: blur(16px);
+  animation: shape-spin-a 32s ease-in-out infinite alternate;
+}
+
+.shape-diamond {
+  width: min(18vw, 200px);
+  height: min(18vw, 200px);
+  top: 4%;
+  right: -2%;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.9), rgba(0, 80, 160, 0.35));
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.5);
+  filter: blur(14px);
+  animation: shape-diamond-drift 22s ease-in-out infinite alternate;
+}
+
+.shape-hex {
+  width: min(22vw, 240px);
+  height: min(20vw, 220px);
+  bottom: -4%;
+  left: -2%;
+  background: linear-gradient(180deg, rgba(90, 40, 220, 0.75), rgba(255, 0, 128, 0.4));
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  filter: blur(18px);
+  animation: shape-drift-c 28s ease-in-out infinite alternate;
+}
+
+.shape-blade {
+  width: min(8vw, 72px);
+  height: min(55vh, 520px);
+  top: 12%;
+  right: 14%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, rgba(232, 255, 0, 0.85), rgba(0, 240, 255, 0.4), transparent);
+  filter: blur(18px);
+  animation: shape-blade-drift 24s ease-in-out infinite alternate;
+}
+
+.shape-chevron {
+  width: min(20vw, 210px);
+  height: min(14vw, 150px);
+  bottom: -2%;
+  right: -4%;
+  background: rgba(0, 240, 255, 0.7);
+  clip-path: polygon(50% 0%, 100% 70%, 78% 100%, 50% 45%, 22% 100%, 0% 70%);
+  filter: blur(16px);
+  animation: shape-drift-a 20s ease-in-out infinite alternate-reverse;
+}
+
+.shape-bar {
+  width: min(28vw, 300px);
+  height: min(5vw, 48px);
+  top: 42%;
+  left: -4%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 128, 0.9), rgba(0, 240, 255, 0.45));
+  filter: blur(14px);
+  animation: shape-bar-drift 18s ease-in-out infinite alternate;
+}
+
+.shape-cross {
+  width: min(12vw, 130px);
+  height: min(12vw, 130px);
+  top: 22%;
+  left: 18%;
+  background: rgba(232, 255, 0, 0.7);
+  clip-path: polygon(
+    38% 0%, 62% 0%, 62% 38%, 100% 38%, 100% 62%,
+    62% 62%, 62% 100%, 38% 100%, 38% 62%, 0% 62%, 0% 38%, 38% 38%
+  );
+  filter: blur(12px);
+  animation: shape-cross-drift 26s ease-in-out infinite alternate;
+}
+
+.shape-arc {
+  width: min(28vw, 300px);
+  height: min(28vw, 300px);
+  bottom: 18%;
+  right: 18%;
+  border-radius: 50%;
+  border: 18px solid transparent;
+  border-top-color: rgba(0, 240, 255, 0.85);
+  border-right-color: rgba(0, 240, 255, 0.35);
+  filter: blur(15px);
+  animation: shape-arc-drift 34s ease-in-out infinite alternate;
+}
+
+.shape-pill {
+  width: min(16vw, 180px);
+  height: min(7vw, 72px);
+  top: 68%;
+  left: 22%;
+  border-radius: 999px;
+  background: rgba(90, 40, 220, 0.7);
+  box-shadow: 0 0 20px rgba(90, 40, 220, 0.5);
+  filter: blur(16px);
+  animation: shape-pill-drift 21s ease-in-out infinite alternate;
+}
+
+@keyframes shape-drift-a {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-6%, 7%, 0); }
+}
+
+@keyframes shape-drift-b {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(8%, -5%, 0); }
+}
+
+@keyframes shape-drift-c {
+  from { transform: translate3d(0, 0, 0) rotate(-8deg); }
+  to { transform: translate3d(6%, -8%, 0) rotate(10deg); }
+}
+
+@keyframes shape-spin-a {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(5%, 8%, 0) rotate(18deg); }
+}
+
+@keyframes shape-diamond-drift {
+  from { transform: translate3d(0, 0, 0) rotate(45deg); }
+  to { transform: translate3d(-8%, 6%, 0) rotate(58deg); }
+}
+
+@keyframes shape-blade-drift {
+  from { transform: rotate(18deg) translate3d(0, 0, 0); }
+  to { transform: rotate(26deg) translate3d(-8%, 5%, 0); }
+}
+
+@keyframes shape-bar-drift {
+  from { transform: rotate(-18deg) translate3d(0, 0, 0); }
+  to { transform: rotate(-8deg) translate3d(10%, -6%, 0); }
+}
+
+@keyframes shape-cross-drift {
+  from { transform: rotate(12deg) translate3d(0, 0, 0); }
+  to { transform: rotate(-8deg) translate3d(6%, 8%, 0); }
+}
+
+@keyframes shape-arc-drift {
+  from { transform: rotate(-20deg) translate3d(0, 0, 0); }
+  to { transform: rotate(15deg) translate3d(-6%, -5%, 0); }
+}
+
+@keyframes shape-pill-drift {
+  from { transform: rotate(-28deg) translate3d(0, 0, 0); }
+  to { transform: rotate(-12deg) translate3d(8%, -7%, 0); }
+}
+
+.grid-bg {
+  z-index: 1;
+}
+
+.terminal {
+  z-index: 2;
+  background: rgba(16, 16, 31, 0.78);
+  backdrop-filter: blur(18px) saturate(1.2);
+}
