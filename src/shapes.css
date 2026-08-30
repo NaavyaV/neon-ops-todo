@@ -3,6 +3,8 @@
 }
 
 .neon-field {
+  --px: 0;
+  --py: 0;
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -13,6 +15,7 @@
 .shape {
   position: absolute;
   pointer-events: none;
+  will-change: translate;
 }
 
 .shape-glow {
@@ -27,6 +30,7 @@
   right: -6%;
   background: rgba(0, 240, 255, 0.28);
   animation: shape-drift-a 26s ease-in-out infinite alternate;
+  translate: calc(var(--px) * -28px) calc(var(--py) * -22px);
 }
 
 .shape-glow--magenta {
@@ -36,6 +40,7 @@
   left: -8%;
   background: rgba(255, 0, 128, 0.26);
   animation: shape-drift-b 30s ease-in-out infinite alternate;
+  translate: calc(var(--px) * 24px) calc(var(--py) * 20px);
 }
 
 .shape-ring {
@@ -48,6 +53,7 @@
   box-shadow: 0 0 28px rgba(255, 0, 128, 0.45);
   filter: blur(16px);
   animation: shape-spin-a 32s ease-in-out infinite alternate;
+  translate: calc(var(--px) * 18px) calc(var(--py) * 14px);
 }
 
 .shape-diamond {
@@ -59,6 +65,7 @@
   box-shadow: 0 0 24px rgba(0, 240, 255, 0.5);
   filter: blur(14px);
   animation: shape-diamond-drift 22s ease-in-out infinite alternate;
+  translate: calc(var(--px) * -20px) calc(var(--py) * 16px);
 }
 
 .shape-hex {
@@ -70,6 +77,7 @@
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   filter: blur(18px);
   animation: shape-drift-c 28s ease-in-out infinite alternate;
+  translate: calc(var(--px) * 16px) calc(var(--py) * -18px);
 }
 
 .shape-blade {
@@ -81,6 +89,7 @@
   background: linear-gradient(180deg, transparent, rgba(232, 255, 0, 0.85), rgba(0, 240, 255, 0.4), transparent);
   filter: blur(18px);
   animation: shape-blade-drift 24s ease-in-out infinite alternate;
+  translate: calc(var(--px) * -14px) calc(var(--py) * 22px);
 }
 
 .shape-chevron {
@@ -92,6 +101,7 @@
   clip-path: polygon(50% 0%, 100% 70%, 78% 100%, 50% 45%, 22% 100%, 0% 70%);
   filter: blur(16px);
   animation: shape-drift-a 20s ease-in-out infinite alternate-reverse;
+  translate: calc(var(--px) * 22px) calc(var(--py) * -12px);
 }
 
 .shape-bar {
@@ -103,6 +113,7 @@
   background: linear-gradient(90deg, transparent, rgba(255, 0, 128, 0.9), rgba(0, 240, 255, 0.45));
   filter: blur(14px);
   animation: shape-bar-drift 18s ease-in-out infinite alternate;
+  translate: calc(var(--px) * -12px) calc(var(--py) * 10px);
 }
 
 .shape-cross {
@@ -117,6 +128,7 @@
   );
   filter: blur(12px);
   animation: shape-cross-drift 26s ease-in-out infinite alternate;
+  translate: calc(var(--px) * 10px) calc(var(--py) * -14px);
 }
 
 .shape-arc {
@@ -130,6 +142,7 @@
   border-right-color: rgba(0, 240, 255, 0.35);
   filter: blur(15px);
   animation: shape-arc-drift 34s ease-in-out infinite alternate;
+  translate: calc(var(--px) * -16px) calc(var(--py) * 12px);
 }
 
 .shape-pill {
@@ -142,6 +155,7 @@
   box-shadow: 0 0 20px rgba(90, 40, 220, 0.5);
   filter: blur(16px);
   animation: shape-pill-drift 21s ease-in-out infinite alternate;
+  translate: calc(var(--px) * 14px) calc(var(--py) * 16px);
 }
 
 @keyframes shape-drift-a {
@@ -195,11 +209,21 @@
 }
 
 .grid-bg {
+  --px: 0;
+  --py: 0;
   z-index: 1;
+  translate: calc(var(--px) * 10px) calc(var(--py) * 8px);
 }
 
 .terminal {
   z-index: 2;
   background: rgba(16, 16, 31, 0.78);
   backdrop-filter: blur(18px) saturate(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape,
+  .grid-bg {
+    translate: none;
+  }
 }
