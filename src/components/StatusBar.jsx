@@ -1,4 +1,4 @@
-export default function StatusBar({ active, completed, total }) {
+export default function StatusBar({ active, completed, total, scheduled = 0 }) {
   const pct = total === 0 ? 0 : Math.round((completed / total) * 100)
 
   return (
@@ -11,6 +11,10 @@ export default function StatusBar({ active, completed, total }) {
         <div className="metric">
           <span className="metric-value">{completed}</span>
           <span className="metric-label">DONE</span>
+        </div>
+        <div className="metric">
+          <span className="metric-value">{scheduled}</span>
+          <span className="metric-label">SCHED</span>
         </div>
         <div className="metric">
           <span className="metric-value">{total}</span>

@@ -2,11 +2,13 @@ import { useState } from 'react'
 
 export default function TodoInput({ onAdd }) {
   const [value, setValue] = useState('')
+  const [dueDate, setDueDate] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (onAdd(value)) {
+    if (onAdd(value, dueDate || null)) {
       setValue('')
+      setDueDate('')
     }
   }
 
@@ -33,6 +35,18 @@ export default function TodoInput({ onAdd }) {
         <button type="submit" className="input-submit" disabled={!value.trim()}>
           EXEC
         </button>
+      </div>
+      <div className="input-date-row">
+        <label htmlFor="task-date" className="input-date-label">
+          TIMESTAMP (OPTIONAL)
+        </label>
+        <input
+          id="task-date"
+          type="date"
+          className="input-date-field"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
       </div>
     </form>
   )

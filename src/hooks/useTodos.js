@@ -18,7 +18,7 @@ export function useTodos() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
   }, [todos])
 
-  const addTodo = (text) => {
+  const addTodo = (text, dueDate = null) => {
     const trimmed = text.trim()
     if (!trimmed) return false
 
@@ -29,6 +29,7 @@ export function useTodos() {
         text: trimmed,
         completed: false,
         createdAt: Date.now(),
+        dueDate: dueDate || null,
       },
     ])
     return true

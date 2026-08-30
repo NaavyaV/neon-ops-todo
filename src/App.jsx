@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useTodos } from './hooks/useTodos'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
+import CalendarView from './components/CalendarView'
 import StatusBar from './components/StatusBar'
 import './App.css'
 
@@ -9,6 +10,11 @@ const FILTERS = [
   { id: 'all', label: 'ALL OPS' },
   { id: 'active', label: 'ACTIVE' },
   { id: 'completed', label: 'ARCHIVED' },
+]
+
+const VIEWS = [
+  { id: 'list', label: 'OPS LIST' },
+  { id: 'calendar', label: 'CALENDAR' },
 ]
 
 function filterTodos(todos, filter) {
@@ -19,6 +25,7 @@ function filterTodos(todos, filter) {
 
 export default function App() {
   const { todos, addTodo, toggleTodo, deleteTodo, clearCompleted } = useTodos()
+  const [view, setView] = useState('list')
   const [filter, setFilter] = useState('all')
   const [time, setTime] = useState(new Date())
 
@@ -30,6 +37,7 @@ export default function App() {
   const visible = filterTodos(todos, filter)
   const activeCount = todos.filter((t) => !t.completed).length
   const completedCount = todos.filter((t) => t.completed).length
+  const scheduledCount = todos.filter((t) => t.dueDate).length
 
   return (
     <div className="app">
@@ -57,36 +65,56 @@ export default function App() {
           active={activeCount}
           completed={completedCount}
           total={todos.length}
+          scheduled={scheduledCount}
         />
 
-        <TodoInput onAdd={addTodo} />
-
-        <nav className="filter-bar" aria-label="Filter tasks">
-          {FILTERS.map(({ id, label }) => (
+        <nav className="view-bar" aria-label="View mode">
+          {VIEWS.map(({ id, label }) => (
             <button
               key={id}
-              className={`filter-btn ${filter === id ? 'filter-btn--active' : ''}`}
-              onClick={() => setFilter(id)}
-              aria-pressed={filter === id}
+              className={`view-btn ${view === id ? 'view-btn--active' : ''}`}
+              onClick={() => setView(id)}
+              aria-pressed={view === id}
             >
               {label}
             </button>
           ))}
         </nav>
 
-        <TodoList
-          todos={visible}
-          onToggle={toggleTodo}
-          onDelete={deleteTodo}
-          filter={filter}
-        />
+        {view === 'list' ? (
+          <>
+            <TodoInput onAdd={addTodo} />
 
-        {completedCount > 0 && (
-          <footer className="terminal-footer">
-            <button className="purge-btn" onClick={clearCompleted}>
-              PURGE ARCHIVED [{completedCount}]
-            </button>
-          </footer>
+            <nav className="filter-bar" aria-label="Filter tasks">
+              {FILTERS.map(({ id, label }) => (
+                <button
+                  key={id}
+                  className={`filter-btn ${filter === id ? 'filter-btn--active' : ''}`}
+                  onClick={() => setFilter(id)}
+                  aria-pressed={filter === id}
+                >
+                  {label}
+                </button>
+              ))}
+            </nav>
+
+            <TodoList
+              todos={visible}
+              onToggle={toggleTodo}
+              onDelete={deleteTodo}
+              filter={filter}
+            />
+
+            {completedCount > 0 && (
+              <footer className="terminal-footer">
+                <button className="purge-btn" onClick={clearCompleted}>
+                  PURGE ARCHIVED [{completedCount}]
+                </button>
+              </footer>
+            )}
+          </>
+        ) : (
+          <CalendarView todos={todos} onToggle={toggleTodo} />
         )}
       </main>
     </div>
