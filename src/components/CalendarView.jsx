@@ -57,6 +57,7 @@ export default function CalendarView({ todos, onToggle }) {
     for (let day = 1; day <= daysInMonth; day++) {
       cells.push(new Date(year, month, day))
     }
+    while (cells.length % 7 !== 0) cells.push(null)
     return cells
   }, [viewDate])
 
@@ -78,15 +79,16 @@ export default function CalendarView({ todos, onToggle }) {
         <button type="button" className="cal-nav-btn" onClick={() => shiftMonth(-1)} aria-label="Previous month">
           ◀
         </button>
-        <h2 className="calendar-title">{formatMonthYear(viewDate)}</h2>
+        <div className="calendar-toolbar-center">
+          <h2 className="calendar-title">{formatMonthYear(viewDate)}</h2>
+          <button type="button" className="cal-today-btn" onClick={goToToday}>
+            TODAY
+          </button>
+        </div>
         <button type="button" className="cal-nav-btn" onClick={() => shiftMonth(1)} aria-label="Next month">
           ▶
         </button>
       </div>
-
-      <button type="button" className="cal-today-btn" onClick={goToToday}>
-        JUMP TO TODAY
-      </button>
 
       <div className="calendar-grid" role="grid" aria-label="Month calendar">
         {WEEKDAYS.map((day) => (

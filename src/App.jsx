@@ -40,11 +40,11 @@ export default function App() {
   const scheduledCount = todos.filter((t) => t.dueDate).length
 
   return (
-    <div className="app">
+    <div className={`app ${view === 'calendar' ? 'app--calendar' : ''}`}>
       <div className="scanlines" aria-hidden="true" />
       <div className="grid-bg" aria-hidden="true" />
 
-      <main className="terminal">
+      <main className={`terminal ${view === 'calendar' ? 'terminal--calendar' : ''}`}>
         <header className="terminal-header">
           <div className="header-brand">
             <span className="brand-glyph">◈</span>
