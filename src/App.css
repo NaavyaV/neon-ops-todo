@@ -1,14 +1,2 @@
-.app{position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
-.terminal{position:relative;width:100%;max-width:680px;background:var(--panel);border:1px solid rgba(0,240,255,.25);box-shadow:var(--glow-cyan)}
-.terminal-header{display:flex;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid rgba(0,240,255,.15)}
-.brand-title{font-family:var(--font-display);font-size:1.35rem;font-weight:900;letter-spacing:.15em;color:var(--cyan);text-shadow:var(--glow-cyan)}
-.status-bar{display:flex;justify-content:space-between;padding:.85rem 1.5rem}
-.todo-input{padding:1.25rem 1.5rem}
-.input-field{flex:1;background:rgba(0,0,0,.4);border:1px solid rgba(0,240,255,.2);color:var(--text);padding:.6rem .75rem}
-.filter-bar{display:flex}
-.filter-btn{flex:1;padding:.65rem;color:var(--muted)}
-.filter-btn--active{color:var(--cyan)}
-.todo-list{list-style:none}
-.todo-item{display:grid;grid-template-columns:auto auto 1fr auto;gap:.75rem;padding:.85rem 1.5rem}
-.todo-item--done{opacity:.55;text-decoration:line-through}
-.purge-btn{color:var(--magenta);padding:.5rem 1.25rem;border:1px solid rgba(255,0,128,.35)}
+.app{max-width:680px;margin:2rem auto;padding:1.5rem;border:1px solid #00f0ff}
+h1{color:#00f0ff}
