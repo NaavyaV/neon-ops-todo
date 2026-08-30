@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-node_modules
-dist
-.env
-.env.*
-.vibehub/
-=======
 # Added by VibeHub
 # VibeHub (local integration — not part of your app)
 .vibehub/
@@ -33,4 +26,3 @@ target/
 !.env.example
 *.log
 .DS_Store
->>>>>>> e26b16aa45850fd3941e3d9db2f9b75b31e5156f
