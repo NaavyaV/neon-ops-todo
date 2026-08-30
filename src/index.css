@@ -28,7 +28,10 @@ html {
 
 body {
   font-family: var(--font-mono);
-  background: var(--void);
+  background:
+    radial-gradient(ellipse 90% 55% at 80% -5%, rgba(0, 70, 110, 0.45), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 0% 100%, rgba(90, 0, 55, 0.4), transparent 55%),
+    var(--void);
   color: var(--text);
   min-height: 100dvh;
   line-height: 1.5;

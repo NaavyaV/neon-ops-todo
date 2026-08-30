@@ -41,6 +41,19 @@ export default function App() {
 
   return (
     <div className={`app ${view === 'calendar' ? 'app--calendar' : ''}`}>
+      <div className="neon-field" aria-hidden="true">
+        <span className="shape shape-glow shape-glow--cyan" />
+        <span className="shape shape-glow shape-glow--magenta" />
+        <span className="shape shape-ring" />
+        <span className="shape shape-diamond" />
+        <span className="shape shape-hex" />
+        <span className="shape shape-blade" />
+        <span className="shape shape-chevron" />
+        <span className="shape shape-bar" />
+        <span className="shape shape-cross" />
+        <span className="shape shape-arc" />
+        <span className="shape shape-pill" />
+      </div>
       <div className="scanlines" aria-hidden="true" />
       <div className="grid-bg" aria-hidden="true" />
 
