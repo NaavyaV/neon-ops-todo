@@ -35,7 +35,6 @@ export default function App() {
     <div className="app">
       <div className="scanlines" aria-hidden="true" />
       <div className="grid-bg" aria-hidden="true" />
-
       <main className="terminal">
         <header className="terminal-header">
           <div className="header-brand">
@@ -52,15 +51,8 @@ export default function App() {
             </span>
           </div>
         </header>
-
-        <StatusBar
-          active={activeCount}
-          completed={completedCount}
-          total={todos.length}
-        />
-
+        <StatusBar active={activeCount} completed={completedCount} total={todos.length} />
         <TodoInput onAdd={addTodo} />
-
         <nav className="filter-bar" aria-label="Filter tasks">
           {FILTERS.map(({ id, label }) => (
             <button
@@ -73,14 +65,7 @@ export default function App() {
             </button>
           ))}
         </nav>
-
-        <TodoList
-          todos={visible}
-          onToggle={toggleTodo}
-          onDelete={deleteTodo}
-          filter={filter}
-        />
-
+        <TodoList todos={visible} onToggle={toggleTodo} onDelete={deleteTodo} filter={filter} />
         {completedCount > 0 && (
           <footer className="terminal-footer">
             <button className="purge-btn" onClick={clearCompleted}>
