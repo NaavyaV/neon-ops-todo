@@ -1,0 +1,28 @@
+# Added by VibeHub
+# VibeHub (local integration — not part of your app)
+.vibehub/
+.cursor/mcp.json
+.cursor/rules/vibehub.mdc
+
+node_modules/
+.pnpm-store/
+.yarn/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.turbo/
+.cache/
+.wrangler/
+coverage/
+__pycache__/
+.venv/
+venv/
+target/
+.dev.vars
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
