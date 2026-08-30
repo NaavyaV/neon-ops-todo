@@ -1,0 +1,12 @@
+{
+  "generated_by": "vibehub",
+  "routes": [],
+  "exports": [
+    {
+      "name": "CalendarView",
+      "feature": "add-calendar-view",
+      "module": "src/components/CalendarView"
+    }
+  ],
+  "dependencies": {}
+}
