@@ -6,6 +6,16 @@
       "name": "CalendarView",
       "feature": "add-calendar-view",
       "module": "src/components/CalendarView"
+    },
+    {
+      "name": "SettingsView",
+      "feature": "add-a-settings-page",
+      "module": "src/components/SettingsView"
+    },
+    {
+      "name": "useSettings",
+      "feature": "add-a-settings-page",
+      "module": "src/hooks/useSettings"
     }
   ],
   "dependencies": {}

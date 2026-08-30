@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTodos } from './hooks/useTodos'
+import { useSettings } from './hooks/useSettings'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
 import CalendarView from './components/CalendarView'
+import SettingsView from './components/SettingsView'
 import StatusBar from './components/StatusBar'
 import './App.css'
 import './shapes.css'
@@ -16,7 +18,17 @@ const FILTERS = [
 const VIEWS = [
   { id: 'list', label: 'OPS LIST' },
   { id: 'calendar', label: 'CALENDAR' },
+  { id: 'settings', label: 'CONFIG' },
 ]
+
+function formatClock(time, militaryTime, showSeconds) {
+  return time.toLocaleTimeString('en-US', {
+    hour12: !militaryTime,
+    hour: '2-digit',
+    minute: '2-digit',
+    ...(showSeconds ? { second: '2-digit' } : {}),
+  })
+}
 
 function filterTodos(todos, filter) {
   if (filter === 'active') return todos.filter((t) => !t.completed)
@@ -26,6 +38,7 @@ function filterTodos(todos, filter) {
 
 export default function App() {
   const { todos, addTodo, toggleTodo, deleteTodo, clearCompleted } = useTodos()
+  const { settings, set: setSetting, reset: resetSettings } = useSettings()
   const [view, setView] = useState('list')
   const [filter, setFilter] = useState('all')
   const [time, setTime] = useState(new Date())
@@ -39,7 +52,17 @@ export default function App() {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (reduced.matches) return undefined
+    const resetParallax = () => {
+      fieldRef.current?.style.setProperty('--px', '0')
+      fieldRef.current?.style.setProperty('--py', '0')
+      gridRef.current?.style.setProperty('--px', '0')
+      gridRef.current?.style.setProperty('--py', '0')
+    }
+
+    if (reduced.matches || !settings.parallax) {
+      resetParallax()
+      return undefined
+    }
 
     let raf = 0
     let targetX = 0
@@ -80,15 +103,23 @@ export default function App() {
       window.removeEventListener('pointermove', onMove)
       if (raf) cancelAnimationFrame(raf)
     }
-  }, [])
+  }, [settings.parallax])
 
   const visible = filterTodos(todos, filter)
   const activeCount = todos.filter((t) => !t.completed).length
   const completedCount = todos.filter((t) => t.completed).length
   const scheduledCount = todos.filter((t) => t.dueDate).length
 
+  const appClass = [
+    'app',
+    settings.parallax ? '' : 'app--no-parallax',
+    settings.ambientDrift ? '' : 'app--still',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <div className="app">
+    <div className={appClass}>
       <div className="neon-field" aria-hidden="true" ref={fieldRef}>
         <span className="shape shape-glow shape-glow--cyan" />
         <span className="shape shape-glow shape-glow--magenta" />
@@ -102,7 +133,7 @@ export default function App() {
         <span className="shape shape-arc" />
         <span className="shape shape-pill" />
       </div>
-      <div className="scanlines" aria-hidden="true" />
+      {settings.scanlines && <div className="scanlines" aria-hidden="true" />}
       <div className="grid-bg" aria-hidden="true" ref={gridRef} />
 
       <main className="terminal">
@@ -117,7 +148,7 @@ export default function App() {
           <div className="header-meta">
             <span className="meta-chip">SECTOR 7G</span>
             <span className="meta-time">
-              {time.toLocaleTimeString('en-US', { hour12: false })}
+              {formatClock(time, settings.militaryTime, settings.showSeconds)}
             </span>
           </div>
         </header>
@@ -142,7 +173,7 @@ export default function App() {
           ))}
         </nav>
 
-        {view === 'list' ? (
+        {view === 'list' && (
           <>
             <TodoInput onAdd={addTodo} />
 
@@ -174,8 +205,17 @@ export default function App() {
               </footer>
             )}
           </>
-        ) : (
-          <CalendarView todos={todos} onToggle={toggleTodo} />
+        )}
+
+        {view === 'calendar' && <CalendarView todos={todos} onToggle={toggleTodo} />}
+
+        {view === 'settings' && (
+          <SettingsView
+            settings={settings}
+            time={time}
+            onChange={setSetting}
+            onReset={resetSettings}
+          />
         )}
       </main>
     </div>

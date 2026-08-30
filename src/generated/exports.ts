@@ -3,3 +3,5 @@
 // will be overwritten. Declare routes/exports/deps in your feature manifest.
 
 export { CalendarView } from "../components/CalendarView";
+export { SettingsView } from "../components/SettingsView";
+export { useSettings } from "../hooks/useSettings";
